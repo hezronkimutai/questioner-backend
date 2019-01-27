@@ -7,20 +7,20 @@ from flask_restful import Resource , reqparse
 from app import api,app
 
 meetup_parser = reqparse.RequestParser()
-meetup_parser.add_argument('meetup_title', type=str, help='Please enter question title', required=True)
+meetup_parser.add_argument('meetup_title', type=str, help='Please enter meetup  title', required=True)
 meetup_parser.add_argument('meetup_body', type=str, help='Enter your Question', required=True)
 
 
 class MeetupRecord(Resource):
     def get(self):
-        return {"All_meetups":"All_meetups"}
+        return {"All_meetupss":"All_meetups"}
 
     def post(self):
-        meetup_args = question_parser.parse_args()
+        question_args = question_parser.parse_args()
         '''todo_id = int(max(TODOS.keys()).lstrip('todo')) + 1
         todo_id = 'todo%i' % todo_id'''
-        meetup = {'title': question_args['meetup_title'] , 'body': question_args['meetup_body']}
-        return TODOS, 201
+        meetups = {'title': question_args['meetup_title'] , 'body': question_args['meetup_body']}
+        return meetups, 201
 
 
 
@@ -30,5 +30,5 @@ class SingleMeetup(Resource):
 
 
 
-api.add_resource(MeetupRecord, '/questions')
-api.add_resource(SingleMeetup, '/question')
+api.add_resource(MeetupRecord, '/meetups')
+api.add_resource(SingleMeetup, '/meetup')
