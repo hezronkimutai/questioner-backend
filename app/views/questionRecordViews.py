@@ -1,6 +1,6 @@
 
 from flask import jsonify, Blueprint, request, json, abort, make_response
-from ..models.questionRecordModels import QuestionRecord
+from ..models.questionRecordModels import Questions , all_questions
 from datetime import datetime
 from uuid import uuid4
 from flask_restful import Resource , reqparse
@@ -17,10 +17,11 @@ class QuestionRecord(Resource):
 
     def post(self):
         question_args = question_parser.parse_args()
-        '''todo_id = int(max(TODOS.keys()).lstrip('todo')) + 1
-        todo_id = 'todo%i' % todo_id'''
-        TODOS = {'title': question_args['title'] , 'body': question_args['body']}
-        return TODOS, 201
+        title =question_args['title']
+        body = question_args['body']
+        question = Questions()
+        question.create_question(title ,body)
+        return  all_questions, 201
 
 
 

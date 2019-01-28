@@ -1,6 +1,6 @@
 
 from flask import jsonify, Blueprint, request, json, abort, make_response
-from ..models.questionRecordModels import QuestionRecord
+from ..models.meetupRecordModels import Meetups , all_meetups
 from datetime import datetime
 from uuid import uuid4
 from flask_restful import Resource , reqparse
@@ -16,13 +16,12 @@ class MeetupRecord(Resource):
         return {"All_meetupss":"All_meetups"}
 
     def post(self):
-        question_args = question_parser.parse_args()
-        '''todo_id = int(max(TODOS.keys()).lstrip('todo')) + 1
-        todo_id = 'todo%i' % todo_id'''
-        meetups = {'title': question_args['meetup_title'] , 'body': question_args['meetup_body']}
-        return meetups, 201
-
-
+        meetup_args = meetup_parser.parse_args()
+        title =meetup_args['meetup_title']
+        body = meetup_args['meetup_body']
+        meetup = Meetups()
+        meetup.create_meetup(title ,body)
+        return  all_meetups, 201
 
 class SingleMeetup(Resource):
     def get(self):

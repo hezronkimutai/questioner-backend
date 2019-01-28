@@ -1,6 +1,6 @@
 
 from flask import jsonify, Blueprint, request, json, abort, make_response
-from ..models.questionRecordModels import QuestionRecord
+from ..models.userRecordModels import UserRecord , all_users
 from datetime import datetime
 from uuid import uuid4
 from flask_restful import Resource , reqparse
@@ -18,7 +18,7 @@ login_parser.add_argument('login_email', type=str, help='Please enter the email'
 login_parser.add_argument('login_password', type=str, help='please enter the password', required=True)
 
 
-class UserRecord(Resource):
+class SignupUser(Resource):
     def get(self):
         return {"All_users":"All_users"}
 
@@ -26,28 +26,36 @@ class UserRecord(Resource):
         user_args = user_parser.parse_args()
         '''todo_id = int(max(TODOS.keys()).lstrip('todo')) + 1
         todo_id = 'todo%i' % todo_id'''
-        user = {
-        'full_name': user_args['full_name'] ,
-        'email': user_args['email'],
-        'username': user_args['username'] ,
-        'password': user_args['password'],
-        'repeat_password': user_args['repeat_password']
-        }
-        return user, 201
+        full_name =user_args['full_name']
+        email = user_args['email']
+        username = user_args['username']
+        password = user_args['password']
+        repeat_password = user_args['repeat_password']
+        user = UserRecord()
+        user.create_user(full_name , email , username , password , repeat_password)
+        return all_users, 201
 
 class UserLogin(Resource):
     def get(self):
-        return {"All_users":"All_users"}
+        registered_users = UserRecord()
+        return registered_users.get_all_users()
 
     def post(self):
         login_args = login_parser.parse_args()
-        '''todo_id = int(max(TODOS.keys()).lstrip('todo')) + 1
-        todo_id = 'todo%i' % todo_id'''
-        login_user = {
-        'email': login_args['login_email'],
-         'password': login_args['login_password']
-          }
-        return login_user, 201
+        login_email = login_args['login_email']
+        login_password = login_args['login_password']
+        registered_users = UserRecord()
+        allusers = registered_users.get_all_users()
+        for user in allusers:
+            if "email" in user.keys():
+                if user["email"]==login_email:
+                    if  "password" in user.keys():
+                        if user["password"]==login_password :
+                            return {"message":"logged in successfully"},200
+                        else:
+                            return {"message":"incorrect credentials"}
+
+
 
 
 class Singleuser(Resource):
@@ -59,5 +67,5 @@ class Singleuser(Resource):
 api.add_resource(UserLogin, '/login')
 '''api.add_resource(UserLogout, '/logout')
 api.add_resource(ResetPassword, '/reset-password')'''
-api.add_resource(UserRecord, '/users')
+api.add_resource(SignupUser, '/users')
 api.add_resource(Singleuser, '/user')
