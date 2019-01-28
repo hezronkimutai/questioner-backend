@@ -1,15 +1,17 @@
+
 all_users = []
 
-class User:
+class UserRecord:
     def __init__(self):
         self.db = all_users
 
-    def create_user(self, username, email, password, repeatPassword):
+    def create_user(self,full_name,  email,username, password, repeat_password):
         new_user = {
-            "username": username,
+            "full_name" : full_name,
             "email": email,
+            "username": username,
             "password": password,
-            "repeatPassword": repeatPassword
+            "repeat_password": repeat_password
         }
         if new_user:
             self.db.append(new_user)

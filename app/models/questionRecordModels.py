@@ -1,25 +1,27 @@
 from flask import jsonify, Blueprint, request, json
 from datetime import datetime
 from uuid import uuid4
-
-class QuestionRecord():
+all_questions = []
+class Questions():
     """ Creates the question record model """
     def __init__(self, *args):
-        self.all_question_records = []
+        self.all_question_records = all_questions
         self.votes = 0
-    def create_question(self, meetupId, title, body,):
+    def create_question(self, title, body,):
         """ Adds a new question to the all_question_records list """
-        votes = self.votes
+        #votes = self.votes
+        now = str(datetime.now())
         new_question = {
             "qstnId": len(self.all_question_records) + 1,
-            "createdOn": datetime.now(),
+            "createdOn": now,
             "createdBy": uuid4().int, # generate userId
-            "meetupId": meetupId, # generate meetupId
+            #"meetupId": meetupId, # generate meetupId
             "title": title,
             "body":body,
-            "votes": votes
+            #"votes": votes
         }
-        self.all_question_records.append(new_question)
+        if new_question:
+            self.all_question_records.append(new_question)
         return new_question
 
     def upvote(self, qstnId):
