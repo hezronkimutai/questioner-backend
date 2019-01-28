@@ -24,12 +24,41 @@ class QuestionRecord(Resource):
         return  all_questions, 201
 
 
+class Upvote(Resource):
+    def patch(self , qstnId):
+        question = Questions()
+        upvte = question.upvote(qstnId)
+        return {"status": 200, "data": upvte}, 200
+
+
+class Downvote(Resource):
+    def patch(self ,qstnId):
+        question = Questions()
+        dwnvte = question.downvote(qstnId)
+        return {"status": 200, "data": dwnvte}, 200
+
 
 class SingleQuestion(Resource):
-    def get(self):
-        return {"single_question":"singe_question"}
+    def get(self , qstnId):
+        question = Questions()
+        all_questions = question.get_all_questions()
+        for single_question in all_questions:
+            if single_question["qstnId"] == qstnId:
+                return { "qstnId": qstnId,
+                        "createdOn": single_question["createdOn"],
+                        "createdBy": single_question["createdBy"], # generate userId
+                        #"meetupId": meetupId, # generate meetupId
+                        "title": single_question["title"],
+                        "body":single_question["body"],
+                        "up_votes":single_question["up_votes"],
+                        "down_votes":single_question["down_votes"]
+                        }
+        #return {"single_question":"singe_question"}
+
 
 
 
 api.add_resource(QuestionRecord, '/questions')
-api.add_resource(SingleQuestion, '/question')
+api.add_resource(SingleQuestion, '/questions/<int:qstnId>')
+api.add_resource(Upvote, '/questions/<int:qstnId>/upvote')
+api.add_resource(Downvote, '/questions/<int:qstnId>/downvote')
