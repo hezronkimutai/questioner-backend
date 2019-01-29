@@ -32,8 +32,8 @@ class SignupUser(Resource):
         password = user_args['password']
         repeat_password = user_args['repeat_password']
         user = UserRecord()
-        user.create_user(full_name , email , username , password , repeat_password)
-        return all_users, 201
+        userr = user.create_user(full_name , email , username , password , repeat_password)
+        return userr, 201
 
 class UserLogin(Resource):
     def get(self):
