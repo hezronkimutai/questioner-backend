@@ -1,24 +1,17 @@
-
-import pytest
-import json
+from app import app
 import unittest
 
-from app import app
+testapp = app.test_client()
 
-class TestUser(unittest.TestCase):
-    def setUp(self):
-        self.app = app
-        self.client = self.app.test_client()
-        self.user = {
-            "username": "username",
-            "email": "email@user.com",
-            "password": "yourpassword",
-            "repeat_password": "yourpassword"
-        }
+class Test_test(unittest.TestCase):
+    def test_user_registration_valid_inputs(self):
+        response = self.register(full_name='Hezron kimutai',
+        email='kim@gmail.com',username='kim',password='HHeezziiee1357&%',
+        repeat_password='HHeezziiee1357&%')
+        self.assertEqual(response.status_code,200)
+        self.assertIn(b'')
 
-    def test_api_can_signup_user(self):
-        response = self.client.post('/app/views', data=json.dumps(self.user), content_type='application/json')
-        self.assertEqual(response.status_code, 201)
-
-if __name__ == '__main__':
-    unittest.main()
+    def register(self,full_name,email,username,password,repeat_password):
+        return testapp.post('/users',data=dict(full_name=full_name,
+        email=email,username=username,password=password,repeat_password=repeat_password),
+        follow_redirects=True)
