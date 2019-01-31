@@ -9,8 +9,4 @@ install:
 script: pytest
 after_script:
 - pytest --cov=app tests/
-deploy:
-  provider: pypi
-  user: "hezzie"
-  password:
-secure: "HHeezziiee1357"
+
