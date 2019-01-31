@@ -6,11 +6,6 @@ python:
 - '3.6'
 install:
 - pip install -r requirements.txt
-script: pytest
+script: coverage run -m unittest discover && coverage report
 after_script:
-- pytest --cov=app tests/
-deploy:
-  provider: pypi
-  user: "hezzie"
-  password:
-secure: "HHeezziiee1357"
+-coveralls
