@@ -13,21 +13,28 @@ meetup_parser.add_argument('meetup_body', type=str, help='Enter your Question', 
 
 class MeetupRecord(Resource):
     def get(self):
-        return {"All_meetupss":"All_meetups"}
+        meetup = Meetups()
+        meetups=meetup.get_all_meetups()
+        return meetups, 201
 
     def post(self):
         meetup_args = meetup_parser.parse_args()
         title =meetup_args['meetup_title']
         body = meetup_args['meetup_body']
+        if not title.strip():
+            return {"message":"Please provide your title"},400
+        if not body.strip():
+            return {"message":"Please provide your meetup"},400
         meetup = Meetups()
-        meetup.create_meetup(title ,body)
+        meetup=meetup.create_meetup(title ,body)
         return  all_meetups, 201
 
 class SingleMeetup(Resource):
-    def get(self):
-        return {"single_meetup":"singe_meetup"}
+    def get(self, meetupId):
+        single_meetup = Meetups()
+        return single_meetup.fetch_single_meetup(self)
 
 
 
 api.add_resource(MeetupRecord, '/meetups')
-api.add_resource(SingleMeetup, '/meetup')
+api.add_resource(SingleMeetup, '/meetups/<int:meetupId>')

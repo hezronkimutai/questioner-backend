@@ -18,7 +18,7 @@ class Questions():
         new_question = {
             "qstnId": len(self.all_question_records) + 1,
             "createdOn": now,
-            "createdBy": uuid4().int, # generate userId
+            "createdBy": "session", # generate userId
             #"meetupId": meetupId, # generate meetupId
             "title": title,
             "body":body,

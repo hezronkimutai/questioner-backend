@@ -13,15 +13,21 @@ question_parser.add_argument('body', type=str, help='Enter your Question', requi
 
 class QuestionRecord(Resource):
     def get(self):
-        return {"All_questions":"All_questions"}
+        question = Questions()
+        question=question.get_all_questions()
+        return question, 201
 
     def post(self):
         question_args = question_parser.parse_args()
         title =question_args['title']
         body = question_args['body']
+        if not title.strip():
+            return {"message":"Please provide your title"},400
+        if not body.strip():
+            return {"message":"Please provide your meetup"},400
         question = Questions()
-        question.create_question(title ,body)
-        return  all_questions, 201
+        question=question.create_question(title ,body)
+        return  question, 201
 
 
 class Upvote(Resource):

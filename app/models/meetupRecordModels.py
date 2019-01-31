@@ -28,6 +28,9 @@ class Meetups:
         }
         self.all_meetup_records.append(new_meetup)
 
+    def get_all_meetups(self):
+        return self.all_meetup_records
+
     def fetch_single_meetup(self, meetupId):
         """ Fetches a single meetup based on the meetupId"""
         for meetup in self.all_meetup_records:
