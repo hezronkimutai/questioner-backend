@@ -1,0 +1,6 @@
+[run]
+source =
+    app/
+    tests/
+omit =
+  app/models/*
