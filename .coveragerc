@@ -3,4 +3,4 @@ source =
     app/
     tests/
 omit =
-  app/models/* 
+  app/models/*
