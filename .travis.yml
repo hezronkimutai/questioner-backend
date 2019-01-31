@@ -1,16 +1,16 @@
 sudo: required
 dist: xenial
 language: python
-virtualenv:
-  system_site_packages: true
+
 python:
 - '3.6'
 install:
 - pip install -r requirements.txt
 script: pytest
-after_script: cd ~
+after_script:
+- pytest --cov=app tests/
 deploy:
   provider: pypi
   user: "hezzie"
   password:
-    secure: "HHeezziiee1357"
+secure: "HHeezziiee1357"
