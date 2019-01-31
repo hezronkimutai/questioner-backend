@@ -1,6 +1,4 @@
 [![Build Status](https://travis-ci.org/hezronkimutai/questioner-backend.svg?branch=develop)](https://travis-ci.org/hezronkimutai/questioner-backend)
-[![Coverage Status](https://coveralls.io/repos/github/hezronkimutai/questioner-backend/badge.svg?branch=master)](https://coveralls.io/github/hezronkimutai/questioner-backend?branch=develop)
-[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/hezronkimutai/questioner-backend)
 
 **questione-backend**
 
