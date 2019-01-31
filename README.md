@@ -1,9 +1,11 @@
-**questione-backend**
 
-questioner-backend  flask-restful api for implementing the questioner user-interface https://github.com/hezronkimutai/questioner  
 [![Build Status](https://travis-ci.org/hezronkimutai/questioner-backend.svg?branch=master)](https://travis-ci.org/hezronkimutai/questioner-backend)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6ba099c18d364dae0489/maintainability)](https://codeclimate.com/github/hezronkimutai/questioner-backend/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/6ba099c18d364dae0489/test_coverage)](https://codeclimate.com/github/hezronkimutai/questioner-backend/test_coverage)
+
+**questione-backend**
+
+questioner-backend  flask-restful api for implementing the questioner user-interface https://github.com/hezronkimutai/questioner  
 
 **Pre-requisites**
 
